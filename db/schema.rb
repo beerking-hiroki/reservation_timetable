@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_03_022228) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_04_130027) do
   create_table "rooms", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "room_type"
@@ -39,7 +39,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_03_022228) do
   create_table "stores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "crypted_password", null: false
+    t.string "password_digest", null: false
     t.time "open_time", null: false
     t.time "close_time", null: false
     t.datetime "created_at", null: false

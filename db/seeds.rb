@@ -10,7 +10,7 @@
 
 store = Store.find_or_create_by!(email: 'example@email.com') do |s|
   s.name = 'テスト店'
-  s.crypted_password = 'password'
+  s.password = 'password'
   s.open_time = "9:00"
   s.close_time = "5:00"
   # close_timeがopen_timeより小さい場合は翌日の閉店(例:9:00-翌5:00)
