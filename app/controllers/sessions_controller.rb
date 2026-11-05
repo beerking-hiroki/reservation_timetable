@@ -19,7 +19,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-
+    session.delete(:store_id)
+    redirect_to login_path, status: :see_other
   end
 
 end

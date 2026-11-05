@@ -26,5 +26,7 @@
   <body>
     <%= flash.now[:alert] %>
     <%= yield %>
-  </body>
-</html>
+
+    <% if current_store %>
+      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+    <% end %>
