@@ -1,4 +1,3 @@
-<%= "タイムテーブルだよん" %>
-
-
-
+<% @rooms.each do |r| %>
+  <p><%= r.name %> (定員<%= r.capacity %>名) </p>
+<% end %>
