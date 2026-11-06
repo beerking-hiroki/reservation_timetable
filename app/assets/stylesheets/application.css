@@ -9,4 +9,16 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
- 
+.room-row {
+  display: flex;
+  background: #eef;
+} 
+
+.room-label {
+  width: 20%;
+}
+
+.room-track {
+  position: relative;
+  flex: 1;
+}
