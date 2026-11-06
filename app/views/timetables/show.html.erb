@@ -1,3 +1,8 @@
-<% @rooms.each do |r| %>
-  <p><%= r.name %> (定員<%= r.capacity %>名) </p>
+<% @rooms.each do |room| %>
+  <p><%= room.name %> (定員<%= room.capacity %>名) </p>
+  <% room.slots.each do |slot| %>
+    <%= slot.kind %>
+    <%= slot.start_at %>
+    <%= slot.end_at %>
+  <% end %>  
 <% end %>
