@@ -15,4 +15,9 @@ class Store < ApplicationRecord
     start_at..end_at
   end
 
+  def timeline_range(date)
+    range = opening_hours(date)
+    (range.begin - 1.hour)..(range.end + 1.hour)
+  end
+
 end

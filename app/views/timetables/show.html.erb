@@ -1,3 +1,7 @@
+<% @times.each do | time | %>
+  <%= time.strftime("%H:%M") %>
+<% end %>
+
 <% @rooms.each do |room| %>
   <p><%= room.name %> (定員<%= room.capacity %>名) </p>
   <% room.slots.where(start_at: @range).each do |slot| %>
