@@ -15,10 +15,14 @@
 } 
 
 .room-label {
-  width: 20%;
+  width: 10%;
 }
 
 .room-track {
   position: relative;
   flex: 1;
+}
+
+.slot {
+  position: absolute;
 }

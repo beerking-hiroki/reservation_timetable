@@ -11,7 +11,9 @@
   
     <div class="room-track">
       <% room.slots.where(start_at: @range).each do |slot| %>
-        <%= slot.kind %>
+        <div class="slot" style="left: <%= slot_start(slot) %>%; width: <%= slot_width(slot) %>%;">
+          <%= slot.kind %>
+        </div>
         <%= slot.start_at %>
         <%= slot.end_at %>
       <% end %>  
