@@ -33,6 +33,8 @@ Things you may want to cover:
 
 [画面遷移図(Figma)]
 https://www.figma.com/design/J3Y7iAtpIwOIO1kfhLgqdu/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=7-2&p=f&t=I498djcFjv63wHF6-0
+
+[ER図](docs/images/er_diagram.png)
  
 ---
  
