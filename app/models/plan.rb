@@ -8,7 +8,7 @@ class Plan < ApplicationRecord
 
   def duration_or_time_range
     if duration_minutes? == (start_time? && end_time?)
-      errors.add(:base, "エラーメッセージ考える")
+      errors.add(:base, "エラーメッセージ")
     end
   end
 end

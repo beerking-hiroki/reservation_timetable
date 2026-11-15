@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_15_002201) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_15_120531) do
   create_table "plans", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "store_id", null: false
     t.string "name", null: false
@@ -40,11 +40,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_15_002201) do
     t.string "name"
     t.string "tel"
     t.integer "headcount"
-    t.string "plan"
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "plan_id"
+    t.index ["plan_id"], name: "index_slots_on_plan_id"
     t.index ["room_id"], name: "index_slots_on_room_id"
   end
 
@@ -61,5 +62,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_15_002201) do
 
   add_foreign_key "plans", "stores"
   add_foreign_key "rooms", "stores"
+  add_foreign_key "slots", "plans"
   add_foreign_key "slots", "rooms"
 end
