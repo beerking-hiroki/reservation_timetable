@@ -17,7 +17,7 @@ store = Store.find_or_create_by!(email: 'example@email.com') do |s|
 end
 
 
-rooms = { '101' => [2, 3], '209' => [1, 3], '231' => [4, 8] }
+rooms = { '101' => [ 2, 3 ], '209' => [ 1, 3 ], '231' => [ 4, 8 ] }
 rooms.each do |name, capacity_range|
   room = store.rooms.find_or_initialize_by(name: name)
   room.min_capacity = capacity_range.first
@@ -37,7 +37,7 @@ plans_data = [
   { name: "深夜フリータイム", start_time: "22:00", end_time: "5:00" }
 ]
 
-plans_data.each do |p| 
+plans_data.each do |p|
   plan = store.plans.find_or_initialize_by(name: p[:name])
   plan.assign_attributes(p)
   plan.save!
@@ -70,4 +70,3 @@ room = store.rooms.find_by!(name: '231')
 room.slots.find_or_create_by!(kind: :block, start_at: now.change(hour: 19)) do |s|
   s.end_at = now.change(hour: 21)
 end
-

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
   def require_login
     redirect_to login_path unless current_store
   end

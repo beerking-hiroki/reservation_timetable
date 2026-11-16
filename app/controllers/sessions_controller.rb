@@ -1,9 +1,8 @@
-class SessionsController < ApplicationController 
-
-  skip_before_action :require_login, only: [:new, :create]
+class SessionsController < ApplicationController
+  skip_before_action :require_login, only: [ :new, :create ]
 
   # ログイン処理
-  def new  
+  def new
   end
 
   # ログインフォーム送信処理
@@ -22,5 +21,4 @@ class SessionsController < ApplicationController
     session.delete(:store_id)
     redirect_to login_path, status: :see_other
   end
-
 end
