@@ -89,3 +89,7 @@
 .slot.walk_in {
   background-color: lightblue;
 }
+
+.hour {
+  border-left: 1.1px solid #686767;
+}
