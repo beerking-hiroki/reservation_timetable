@@ -13,5 +13,4 @@ class Slot < ApplicationRecord
   validates :tel, presence: true, if: :reservation?
   validates :headcount, presence: true, if: :reservation?
   validates :plan_id, presence: true, if: :reservation?
-
 end

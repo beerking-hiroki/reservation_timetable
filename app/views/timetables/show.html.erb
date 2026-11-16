@@ -1,6 +1,18 @@
-<% @times.each do | time | %>
-  <%= time.strftime("%H:%M") %>
-<% end %>
+<div class="timetable-scroll">
+  <div class="timetable-inner">
+    <div class="time-row">
+      <div class="time-label">
+        部屋(定員人数)
+      </div>
+    <% @times.each do | time | %>
+    <div class="time-cell <%= "hour" if time.min == 0 %>">
+        <% if time.min == 0 %>
+        <%= time.strftime("%H:%M") %>
+      <% end %>  
+    </div>
+    <% end %>
+    </div>
+
 
 <% @rooms.each do |room| %>
   <div class="room-row">
@@ -11,12 +23,15 @@
   
     <div class="room-track">
       <% room.slots.where(start_at: @range).each do |slot| %>
-        <div class="slot" style="left: <%= slot_start(slot) %>%; width: <%= slot_width(slot) %>%;">
+        <div class="slot <%= slot.kind %>" style="left: <%= slot_start(slot) %>%; width: <%= slot_width(slot) %>%;">
           <%= slot.kind %>
         </div>
-        <%= slot.start_at %>
-        <%= slot.end_at %>
+        <%# slot.start_at %>
+        <%# slot.end_at %>
       <% end %>  
     </div>    
   </div>
 <% end %>
+
+  </div>
+</div>

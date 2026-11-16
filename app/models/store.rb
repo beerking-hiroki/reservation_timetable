@@ -8,8 +8,8 @@ class Store < ApplicationRecord
   validates :email, presence: true
   validates :open_time, presence: true
   validates :close_time, presence: true
-  
-  
+
+
   def opening_hours(date)
     start_at = date.in_time_zone.change(hour: open_time.hour, min: open_time.min)
     end_at = date.in_time_zone.change(hour: close_time.hour, min: close_time.min)
@@ -21,5 +21,4 @@ class Store < ApplicationRecord
     range = opening_hours(date)
     (range.begin - 1.hour)..(range.end + 1.hour)
   end
-
 end
