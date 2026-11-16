@@ -1,3 +1,22 @@
-<% @rooms.each do |r| %>
-  <p><%= r.name %> (定員<%= r.capacity %>名) </p>
+<% @times.each do | time | %>
+  <%= time.strftime("%H:%M") %>
+<% end %>
+
+<% @rooms.each do |room| %>
+  <div class="room-row">
+
+    <div class="room-label">
+      <%= room.name %> (定員<%= room.capacity %>名) 
+    </div>
+  
+    <div class="room-track">
+      <% room.slots.where(start_at: @range).each do |slot| %>
+        <div class="slot" style="left: <%= slot_start(slot) %>%; width: <%= slot_width(slot) %>%;">
+          <%= slot.kind %>
+        </div>
+        <%= slot.start_at %>
+        <%= slot.end_at %>
+      <% end %>  
+    </div>    
+  </div>
 <% end %>

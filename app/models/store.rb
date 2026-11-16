@@ -7,4 +7,17 @@ class Store < ApplicationRecord
   has_secure_password
 
   has_many :rooms
+
+  def opening_hours(date)
+    start_at = date.in_time_zone.change(hour: open_time.hour, min: open_time.min)
+    end_at = date.in_time_zone.change(hour: close_time.hour, min: close_time.min)
+    end_at += 1.day if end_at <= start_at
+    start_at..end_at
+  end
+
+  def timeline_range(date)
+    range = opening_hours(date)
+    (range.begin - 1.hour)..(range.end + 1.hour)
+  end
+
 end
