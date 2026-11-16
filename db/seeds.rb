@@ -17,11 +17,30 @@ store = Store.find_or_create_by!(email: 'example@email.com') do |s|
 end
 
 
-rooms = { '101' => 2, '209' => 2, '231' => 10 }
-rooms.each do |name, capacity|
-  store.rooms.find_or_create_by!(name: name) do |r|
-    r.capacity = capacity
-  end
+rooms = { '101' => [2, 3], '209' => [1, 3], '231' => [4, 8] }
+rooms.each do |name, capacity_range|
+  room = store.rooms.find_or_initialize_by(name: name)
+  room.min_capacity = capacity_range.first
+  room.max_capacity = capacity_range.last
+  room.save!
+end
+
+# プラン
+plans_data = [
+  { name: "30分", duration_minutes: 30 },
+  { name: "1時間", duration_minutes: 60 },
+  { name: "1.5時間", duration_minutes: 90 },
+  { name: "2時間", duration_minutes: 120 },
+  { name: "2.5時間", duration_minutes: 150 },
+  { name: "昼フリータイム", start_time: "10:00", end_time: "19:00" },
+  { name: "夕方フリータイム", start_time: "15:00", end_time: "22:00" },
+  { name: "深夜フリータイム", start_time: "22:00", end_time: "5:00" }
+]
+
+plans_data.each do |p| 
+  plan = store.plans.find_or_initialize_by(name: p[:name])
+  plan.assign_attributes(p)
+  plan.save!
 end
 
 # 予約
@@ -32,7 +51,7 @@ room.slots.find_or_create_by!(kind: :reservation, start_at: now.change(hour: 13)
   s.name = 'テスト'
   s.tel = '090-0000-0000'
   s.headcount = 2
-  s.plan = '2時間'
+  s.plan = store.plans.find_by!(name: '2時間')
   s.end_at = now.change(hour: 15)
 end
 
@@ -51,3 +70,4 @@ room = store.rooms.find_by!(name: '231')
 room.slots.find_or_create_by!(kind: :block, start_at: now.change(hour: 19)) do |s|
   s.end_at = now.change(hour: 21)
 end
+

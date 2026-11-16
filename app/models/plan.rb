@@ -1,5 +1,6 @@
 class Plan < ApplicationRecord
   belongs_to :store
+  has_many :slots
 
   validates :name, presence: true
   validate :duration_or_time_range
