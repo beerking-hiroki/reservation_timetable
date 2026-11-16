@@ -1,5 +1,6 @@
 class Slot < ApplicationRecord
   belongs_to :room
+  belongs_to :plan, optional: true
 
   enum :kind, { reservation: 0, walk_in: 1, block: 2 }
   enum :status, { waiting: 0, checked_in: 1, checked_out: 2 }
@@ -11,6 +12,6 @@ class Slot < ApplicationRecord
   validates :name, presence: true, if: :reservation?
   validates :tel, presence: true, if: :reservation?
   validates :headcount, presence: true, if: :reservation?
-  validates :plan, presence: true, if: :reservation?
+  validates :plan_id, presence: true, if: :reservation?
 
 end
