@@ -9,20 +9,83 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+:root {
+  --label-width: 10rem;
+  --cell-width: 2.3rem;
+} 
+
+.timetable-scroll {
+  overflow-x: scroll;
+}
+
+.timetable-inner {
+  min-width: max-content;
+}
+
+.time-row {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+
+}
+
+.time-label {
+  flex-shrink: 0;
+  width: var(--label-width);
+  border-right: 1px solid #ccc;
+  background-color: bisque;
+  position: sticky;
+  left: 0;
+}
+
+.time-cell {
+  flex-shrink: 0;
+  width: var(--cell-width);
+  font-size: 0.7rem;
+  box-sizing: border-box;  
+  border-left: 1px solid #ccf;
+  background-color: bisque;
+}
+
 .room-row {
   display: flex;
+  border-bottom: 1px solid #ccc;
   background: #eef;
+  min-height: 4rem;
 } 
 
 .room-label {
-  width: 10%;
+  width: var(--label-width);
+  border-right: 1px solid #ccc;
+  background-color: aliceblue;
+  position: sticky;
+  left: 0;
+  z-index: 10;
 }
 
 .room-track {
   position: relative;
   flex: 1;
+  background-image: linear-gradient(to right, #ccf 1px, transparent 1px);
+  background-size: var(--cell-width) 100%;
 }
 
 .slot {
   position: absolute;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: orange;
+}
+
+.slot.reservation {
+  background-color: red;
+}
+
+.slot.block {
+  background-color: #ccc;
+}
+
+.slot.walk_in {
+  background-color: lightblue;
 }
