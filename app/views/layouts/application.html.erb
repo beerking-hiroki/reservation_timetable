@@ -24,6 +24,7 @@
   </head>
 
   <body>
+    <%= flash.now[:notice] %>
     <%= flash.now[:alert] %>
     <% if current_store %>
     <header>
