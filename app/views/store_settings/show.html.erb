@@ -1,17 +1,20 @@
 <h2>店舗設定だよん</h2>
-<%= @store.name %>
-<%= @store.open_time.strftime("%H:%M") %>
-~
-<%= @store.close_time.strftime("%H:%M") %>
-
-<% @store.rooms.each do | room | %>
-<p>部屋名</p>
-  <%= room.name %>
-<p>定員人数</p>
-  <%= room.min_capacity %>
+<%= turbo_frame_tag "store_info" do %>
+  <%= link_to "編集", edit_store_setting_path %>
+  <%= @store.name %>
+  <%= @store.open_time.strftime("%H:%M") %>
   ~
-  <%= room.max_capacity %>
-<% end %>
+  <%= @store.close_time.strftime("%H:%M") %>
+<% end %>  
+
+  <% @store.rooms.each do | room | %>
+  <p>部屋名</p>
+    <%= room.name %>
+  <p>定員人数</p>
+    <%= room.min_capacity %>
+    ~
+    <%= room.max_capacity %>
+  <% end %>
 
 <p>プラン</p>  
 <% @store.plans.each do | plan | %>
