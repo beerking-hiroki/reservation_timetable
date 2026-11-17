@@ -1,0 +1,15 @@
+<%= turbo_frame_tag @room do %>
+  <%= flash.now[:alert] %>
+  <%= form_with model: @room do | form | %>
+    <%= form.label :name, "部屋名" %>
+    <%= form.text_field :name %>
+    <div>
+      <%= form.label :min_capacity, "最小人数" %>
+      <%= form.number_field :min_capacity %>
+      <%= form.label :max_capacity, "最大人数" %>
+      <%= form.number_field :max_capacity %>
+    </div>  
+    <%= form.submit "保存する" %>
+    <%= link_to "キャンセル", store_setting_path %>
+  <% end %>
+<% end %>

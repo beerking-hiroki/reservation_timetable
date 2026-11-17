@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "store_info" do %>
+<%= turbo_frame_tag "store_rooms" do %>
   <%= flash.now[:alert] %>
   <%= form_with model: @store, url: store_setting_path do | form | %>
     <%= form.label :name, "店舗名" %>
