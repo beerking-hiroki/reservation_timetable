@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   resource :store_setting, only: [ :show, :edit, :update ]
+  resources :plans, only: [ :edit, :update ]
 end
