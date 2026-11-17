@@ -1,4 +1,4 @@
-<h1>店舗設定だよん</h1>
+<h2>店舗設定だよん</h2>
 <%= @store.name %>
 <%= @store.open_time.strftime("%H:%M") %>
 ~
@@ -12,3 +12,19 @@
   ~
   <%= room.max_capacity %>
 <% end %>
+
+<p>プラン</p>  
+<% @store.plans.each do | plan | %>
+  <div class=" plans-index">
+    <%= plan.name %>
+    <% if plan.duration_minutes.nil? %>
+      <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
+    <% else %>
+      <%= plan.duration_minutes %>分
+    <% end %> 
+  </div>
+<% end %>
+
+
+  
+
