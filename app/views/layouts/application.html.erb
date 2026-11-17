@@ -25,8 +25,13 @@
 
   <body>
     <%= flash.now[:alert] %>
-    <%= yield %>
-
     <% if current_store %>
-      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+    <header>
+      <nav class="header-links">
+        <%= link_to "店舗設定画面", store_setting_path %>
+        <%= link_to "タイムテーブル", root_path %>   
+        <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+      </nav>  
+    </header>
     <% end %>
+    <%= yield %>
