@@ -18,14 +18,17 @@
 
 <p>プラン</p>  
 <% @store.plans.each do | plan | %>
-  <div class=" plans-index">
-    <%= plan.name %>
-    <% if plan.duration_minutes.nil? %>
-      <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
-    <% else %>
-      <%= plan.duration_minutes %>分
-    <% end %> 
-  </div>
+  <%= turbo_frame_tag plan do %>
+    <%= link_to "編集", edit_plan_path(plan) %>
+    <div class=" plans-index">
+      <%= plan.name %>
+      <% if plan.duration_minutes.nil? %>
+        <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
+      <% else %>
+        <%= plan.duration_minutes %>分
+      <% end %> 
+    </div>
+  <% end %>
 <% end %>
 
 
