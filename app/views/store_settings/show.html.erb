@@ -23,20 +23,23 @@
   <% end %>
 
 
-<p>プラン</p>  
-<% @store.plans.each do | plan | %>
-  <%= turbo_frame_tag plan do %>
-    <%= link_to "編集", edit_plan_path(plan) %>
-    <div class=" plans-index">
-      <%= plan.name %>
-      <% if plan.duration_minutes.nil? %>
-        <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
-      <% else %>
-        <%= plan.duration_minutes %>分
-      <% end %> 
-    </div>
-  <% end %>
-<% end %>
+<h2>プラン</h2>
+<%= turbo_frame_tag "new_plan" do %>
+  <div><%= link_to "プラン追加", new_plan_path %></div>
+<% end %>  
+    <% @store.plans.each do | plan | %>
+      <%= turbo_frame_tag plan do %>
+        <div><%= link_to "編集", edit_plan_path(plan) %></div>
+        <div class=" plans-index">
+          <%= plan.name %>
+          <% if plan.duration_minutes.nil? %>
+            <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
+          <% else %>
+            <%= plan.duration_minutes %>分
+          <% end %> 
+        </div>
+      <% end %>
+    <% end %>
 
 
   

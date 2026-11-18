@@ -1,4 +1,19 @@
 class PlansController < ApplicationController
+  def new
+    @plan = current_store.plans.new
+  end
+
+  def create
+    @plan = current_store.plans.new(plan_params)
+    if @plan.save
+      flash[:notice] = "プランを追加しましたよん"
+      redirect_to store_setting_path
+    else
+      flash.now[:alert] = @plan.errors.full_messages.join("、")
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def edit
     @plan = current_store.plans.find(params[:id])
   end
