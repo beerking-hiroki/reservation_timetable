@@ -7,6 +7,10 @@ class SlotsController < ApplicationController
 
   def create
     @slot = Slot.new(slot_params)
+    current_store.rooms.find(slot_params[:room_id])
+    if slot_params[:plan_id].present?
+      current_store.plans.find(slot_params[:plan_id])
+    end
     @slot.kind = :reservation
     if @slot.plan && @slot.plan.duration_minutes
       @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
