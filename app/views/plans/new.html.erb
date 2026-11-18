@@ -2,7 +2,6 @@
     <%= form_with model: @plan, data: { turbo_frame: "_top" } do | form | %>
       <%= form.label :name, "プラン名" %>
       <%= form.text_field :name %>
-
       <%= form.label :duration_minutes, "長さ" %>
       <%= form.number_field :duration_minutes %>
       <%= form.label :start_time, "開始" %>
