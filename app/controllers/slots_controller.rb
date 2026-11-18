@@ -12,6 +12,9 @@ class SlotsController < ApplicationController
       @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
     elsif @slot.plan && @slot.plan.end_time
       @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
+      if @slot.end_at < @slot.start_at
+        @slot.end_at = @slot.end_at + 1.day
+      end
     end
     if @slot.save
       flash[:notice] = "予約を登録しましたよん"
