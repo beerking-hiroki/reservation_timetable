@@ -8,9 +8,14 @@ class SlotsController < ApplicationController
   def create
     @slot = Slot.new(slot_params)
     @slot.kind = :reservation
+    if @slot.plan && @slot.plan.duration_minutes
+      @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
+    elsif @slot.plan && @slot.plan.end_time
+      @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
+    end
     if @slot.save
       flash[:notice] = "予約を登録しましたよん"
-      redirect_to new_slot_path
+      redirect_to root_path
     else
       flash.now[:alert] = @slot.errors.full_messages.join("、")
       @rooms = current_store.rooms
