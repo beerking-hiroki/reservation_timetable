@@ -21,4 +21,3 @@ Rails.application.routes.draw do
   resources :plans, only: [ :new, :create, :edit, :update ]
   resources :rooms, only: [ :edit, :update ]
 end
-
