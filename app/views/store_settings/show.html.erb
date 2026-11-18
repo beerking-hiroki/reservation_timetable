@@ -1,29 +1,45 @@
 <h2>店舗設定だよん</h2>
-<%= @store.name %>
-<%= @store.open_time.strftime("%H:%M") %>
-~
-<%= @store.close_time.strftime("%H:%M") %>
-
-<% @store.rooms.each do | room | %>
-<p>部屋名</p>
-  <%= room.name %>
-<p>定員人数</p>
-  <%= room.min_capacity %>
+<%= turbo_frame_tag "store_info" do %>
+  <%= link_to "編集", edit_store_setting_path %>
+  <%= @store.name %>
+  <%= @store.open_time.strftime("%H:%M") %>
   ~
-  <%= room.max_capacity %>
-<% end %>
+  <%= @store.close_time.strftime("%H:%M") %>
+<% end %>  
 
-<p>プラン</p>  
-<% @store.plans.each do | plan | %>
-  <div class=" plans-index">
-    <%= plan.name %>
-    <% if plan.duration_minutes.nil? %>
-      <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
-    <% else %>
-      <%= plan.duration_minutes %>分
-    <% end %> 
-  </div>
-<% end %>
+  <% @store.rooms.each do | room | %>
+    <%= turbo_frame_tag room do %>
+        <div class=" rooms-index">
+          <p>部屋名</p>
+            <%= room.name %>
+            
+          <p>定員人数</p>
+            <%= room.min_capacity %>
+            ~
+            <%= room.max_capacity %>
+            <%= link_to "編集", edit_room_path(room) %>
+        </div>   
+    <% end %>
+  <% end %>
+
+
+<h2>プラン</h2>
+<%= turbo_frame_tag "new_plan" do %>
+  <div><%= link_to "プラン追加", new_plan_path %></div>
+<% end %>  
+    <% @store.plans.each do | plan | %>
+      <%= turbo_frame_tag plan do %>
+        <div><%= link_to "編集", edit_plan_path(plan) %></div>
+        <div class=" plans-index">
+          <%= plan.name %>
+          <% if plan.duration_minutes.nil? %>
+            <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
+          <% else %>
+            <%= plan.duration_minutes %>分
+          <% end %> 
+        </div>
+      <% end %>
+    <% end %>
 
 
   

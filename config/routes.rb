@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
-  resource :store_setting, only: [ :show ]
+  resource :store_setting, only: [ :show, :edit, :update ]
+  resources :plans, only: [ :new, :create, :edit, :update ]
+  resources :rooms, only: [ :edit, :update ]
 end
