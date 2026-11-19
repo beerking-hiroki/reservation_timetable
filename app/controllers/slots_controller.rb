@@ -7,10 +7,7 @@ class SlotsController < ApplicationController
 
   def create
     @slot = Slot.new(slot_params)
-    current_store.rooms.find(slot_params[:room_id])
-    if slot_params[:plan_id].present?
-      current_store.plans.find(slot_params[:plan_id])
-    end
+    confirm_room_and_plan
     @slot.kind = :reservation
     set_end_at
     if @slot.save
@@ -32,6 +29,7 @@ class SlotsController < ApplicationController
 
   def update
     @slot = current_store.slots.find(params[:id])
+    confirm_room_and_plan
     @slot.assign_attributes(slot_params)
     set_end_at
     if @slot.save
@@ -49,6 +47,13 @@ class SlotsController < ApplicationController
 
   def slot_params
     params.expect(slot: [ :name, :tel, :headcount, :room_id, :plan_id, :start_at, :end_at ])
+  end
+
+  def confirm_room_and_plan
+    current_store.rooms.find(slot_params[:room_id])
+    if slot_params[:plan_id].present?
+      current_store.plans.find(slot_params[:plan_id])
+    end
   end
 
   def set_end_at
