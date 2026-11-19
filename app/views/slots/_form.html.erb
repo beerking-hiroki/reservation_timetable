@@ -16,6 +16,9 @@
       <%= form.datetime_field :end_at %>
 
     <%= form.submit @slot.persisted? ? "更新する" : "登録する" %>
-    <%= link_to "戻る",   root_path %>
+    <% if @slot.persisted? %>
+      <%= link_to "削除", slot_path(@slot), data: { turbo_method: :delete, turbo_confirm: "削除してよいのか？"} %>
+    <% end %>  
+    <%= link_to "戻る", root_path %>
   
   <% end %>

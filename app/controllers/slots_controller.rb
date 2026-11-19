@@ -38,7 +38,20 @@ class SlotsController < ApplicationController
     else
       flash.now[:alert] = @slot.errors.full_messages.join("、")
       @rooms = current_store.rooms
-      @plans =  current_store.plans
+      @plans = current_store.plans
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @slot = current_store.slots.find(params[:id])
+    if @slot.destroy
+      flash[:notice] = "削除しました"
+      redirect_to root_path, status: :see_other
+    else
+      flash.now[:alert] = @slot.errors.full_messages.join("、")
+      @rooms = current_store.rooms
+      @plans = current_store.plans
       render :edit, status: :unprocessable_entity
     end
   end
