@@ -1,0 +1,24 @@
+  <%= form_with model: @slot do | form | %>
+
+    <%= form.label :name, "名前" %>
+      <%= form.text_field :name %>
+    <%= form.label :tel, "電話番号" %>
+      <%= form.text_field :tel %> 
+    <%= form.label :headcount, "利用人数" %>
+      <%= form.number_field :headcount %> 
+
+      <%= form.collection_select :room_id, @rooms, :id, :name %>
+    <%= form.label :plan_id, "プラン" %>
+      <%= form.collection_select :plan_id, @plans, :id, :name, include_blank: true %>
+    <%= form.label :start_at, "開始時間" %>
+      <%= form.datetime_field :start_at, step: 900 %>
+    <%= form.label :end_at, "終了時間" %>
+      <%= form.datetime_field :end_at %>
+
+    <%= form.submit @slot.persisted? ? "更新する" : "登録する" %>
+    <% if @slot.persisted? %>
+      <%= link_to "削除", slot_path(@slot), data: { turbo_method: :delete, turbo_confirm: "削除してよいのか？"} %>
+    <% end %>  
+    <%= link_to "戻る", root_path %>
+  
+  <% end %>

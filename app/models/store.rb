@@ -1,5 +1,6 @@
 class Store < ApplicationRecord
   has_many :rooms
+  has_many :slots, through: :rooms
   has_many :plans
 
   has_secure_password
