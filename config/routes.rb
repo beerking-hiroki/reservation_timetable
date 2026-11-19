@@ -20,5 +20,5 @@ Rails.application.routes.draw do
   resource :store_setting, only: [ :show, :edit, :update ]
   resources :plans, only: [ :new, :create, :edit, :update ]
   resources :rooms, only: [ :edit, :update ]
-  resources :slots, only: [ :new, :create ]
+  resources :slots, only: [ :new, :create, :edit, :update ]
 end

@@ -12,14 +12,7 @@ class SlotsController < ApplicationController
       current_store.plans.find(slot_params[:plan_id])
     end
     @slot.kind = :reservation
-    if @slot.plan && @slot.plan.duration_minutes
-      @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
-    elsif @slot.plan && @slot.plan.end_time
-      @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
-      if @slot.end_at < @slot.start_at
-        @slot.end_at = @slot.end_at + 1.day
-      end
-    end
+    set_end_at
     if @slot.save
       flash[:notice] = "予約を登録しましたよん"
       redirect_to root_path
@@ -31,9 +24,41 @@ class SlotsController < ApplicationController
     end
   end
 
+  def edit
+    @slot = current_store.slots.find(params[:id])
+    @rooms = current_store.rooms
+    @plans =  current_store.plans
+  end
+
+  def update
+    @slot = current_store.slots.find(params[:id])
+    @slot.assign_attributes(slot_params)
+    set_end_at
+    if @slot.save
+      flash[:notice] = "更新しました"
+      redirect_to root_path
+    else
+      flash.now[:alert] = @slot.errors.full_messages.join("、")
+      @rooms = current_store.rooms
+      @plans =  current_store.plans
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def slot_params
     params.expect(slot: [ :name, :tel, :headcount, :room_id, :plan_id, :start_at, :end_at ])
+  end
+
+  def set_end_at
+    if @slot.plan && @slot.plan.duration_minutes
+      @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
+    elsif @slot.plan && @slot.plan.end_time
+      @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
+      if @slot.end_at < @slot.start_at
+        @slot.end_at = @slot.end_at + 1.day
+      end
+    end
   end
 end
