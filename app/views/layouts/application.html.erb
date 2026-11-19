@@ -32,7 +32,7 @@
         <%= link_to "店舗設定画面", store_setting_path %>
         <%= link_to "タイムテーブル", root_path %>   
         <%= link_to "新規予約", new_slot_path %>
-        <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+        <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %>
       </nav>  
     </header>
     <% end %>
