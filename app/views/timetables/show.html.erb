@@ -24,7 +24,7 @@
     <div class="room-track">
       <% room.slots.where(start_at: @range).each do |slot| %>
         <%= link_to edit_slot_path(slot), class: "slot #{slot.kind}", style: "left: #{slot_start(slot)}%; width: #{slot_width(slot)}%;" do %>
-          <%= slot.kind %>
+          <%= slot.name %>
         <% end %>
         <%# slot.start_at %>
         <%# slot.end_at %>
