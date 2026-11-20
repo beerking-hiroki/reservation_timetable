@@ -9,6 +9,7 @@ class Slot < ApplicationRecord
   validates :status, presence: true
   validates :start_at, presence: true
   validates :end_at, presence: true
+  validates :end_at, comparison: { greater_than: :start_at }
   validates :name, presence: true, if: :reservation?
   validates :tel, presence: true, if: :reservation?
   validates :headcount, presence: true, numericality: { only_integer: true, greater_than: 0 }, if: :reservation?
