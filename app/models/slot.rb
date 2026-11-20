@@ -11,7 +11,7 @@ class Slot < ApplicationRecord
   validates :end_at, presence: true
   validates :name, presence: true, if: :reservation?
   validates :tel, presence: true, if: :reservation?
-  validates :headcount, presence: true, if: :reservation?
+  validates :headcount, presence: true, numericality: { only_integer: true, greater_than: 0 }, if: :reservation?
   validates :plan_id, presence: true, if: :reservation?
   validate :start_within_plan_time
 
