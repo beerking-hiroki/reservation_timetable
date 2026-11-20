@@ -1,3 +1,6 @@
+<%= form_with url: root_path, method: :get do | form | %>
+  <%= form.date_field :date, value: @date, onchange: "this.form.requestSubmit()" %>
+<% end %>
 <div class="timetable-scroll">
   <div class="timetable-inner">
     <div class="time-row">
