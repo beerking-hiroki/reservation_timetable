@@ -12,14 +12,57 @@
 :root {
   --label-width: 10rem;
   --cell-width: 2.3rem;
+  --color-header: #A6A6A6;
 } 
+
+.login-page {
+  background-color: #f5f3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-card {
+  width: 320px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.login-card input[type="email"],
+.login-card input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.login-card input[type="submit"] {
+  width: 100%;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #4735cd;
+  color: #fff;
+  cursor: pointer;
+}
 
 .header-links {
   display: flex;
   justify-content: right;
   gap: 1rem;
 }
-
 
 .timetable-scroll {
   overflow-x: scroll;
