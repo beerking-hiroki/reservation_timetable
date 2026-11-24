@@ -1,1 +1,7 @@
-<%= render "form" %>
+<%= turbo_frame_tag "slot_form" do %>
+  <% if @slot.reservation? %>
+    <%= render "form" %>
+  <% else %>
+    <%= render "quick_form" %>
+  <% end %>
+<% end %>

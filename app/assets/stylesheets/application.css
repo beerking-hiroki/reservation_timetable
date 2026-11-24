@@ -110,10 +110,14 @@
 
 .slot.block {
   background-color: #ccc;
+  font-size: 0.7rem;
+  padding: 0%;
 }
 
 .slot.walk_in {
   background-color: lightblue;
+  font-size: 0.7rem;
+  padding: 0%;
 }
 
 .hour {

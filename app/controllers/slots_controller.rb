@@ -1,6 +1,7 @@
 class SlotsController < ApplicationController
   def new
-    @slot = Slot.new(start_at: Time.current.change(min: Time.current.min / 15 * 15))
+    start_at = params[:start_at].present? ? params[:start_at] : Time.current.change(min: Time.current.min / 15 * 15)
+    @slot = Slot.new(room_id: params[:room_id], start_at: start_at, kind: params[:quick].present? ? :walk_in : :reservation)
     @rooms = current_store.rooms
     @plans =  current_store.plans
   end
@@ -8,7 +9,6 @@ class SlotsController < ApplicationController
   def create
     @slot = Slot.new(slot_params)
     confirm_room_and_plan
-    @slot.kind = :reservation
     set_end_at
     if @slot.save
       flash[:notice] = "予約を登録しました"
@@ -59,7 +59,7 @@ class SlotsController < ApplicationController
   private
 
   def slot_params
-    params.expect(slot: [ :name, :tel, :headcount, :room_id, :plan_id, :start_at, :end_at ])
+    params.expect(slot: [ :name, :tel, :headcount, :room_id, :plan_id, :start_at, :end_at, :kind ])
   end
 
   def confirm_room_and_plan
@@ -77,6 +77,8 @@ class SlotsController < ApplicationController
       if @slot.end_at < @slot.start_at
         @slot.end_at = @slot.end_at + 1.day
       end
+    elsif @slot.end_at.blank?
+      @slot.end_at = @slot.start_at + 2.hours
     end
   end
 end
