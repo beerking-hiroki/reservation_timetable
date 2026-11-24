@@ -16,6 +16,10 @@ class Slot < ApplicationRecord
   validates :plan_id, presence: true, if: :reservation?
   validate :start_within_plan_time
 
+  def overlaps_with?(other)
+    other.start_at <= end_at && start_at <= other.end_at
+  end
+
   private
   def start_within_plan_time
     return unless plan && plan.start_time? && plan.end_time?

@@ -83,6 +83,7 @@
   box-sizing: border-box;
   padding: 1rem;
   background-color: orange;
+  border: 1px solid #fbf6f6;
 }
 
 .slot.reservation {

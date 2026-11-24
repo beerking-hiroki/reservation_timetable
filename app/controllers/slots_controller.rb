@@ -11,7 +11,7 @@ class SlotsController < ApplicationController
     @slot.kind = :reservation
     set_end_at
     if @slot.save
-      flash[:notice] = "予約を登録しましたよん"
+      flash[:notice] = "予約を登録しました"
       redirect_to root_path
     else
       flash.now[:alert] = @slot.errors.full_messages.join("、")
