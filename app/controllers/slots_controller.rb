@@ -70,15 +70,16 @@ class SlotsController < ApplicationController
   end
 
   def set_end_at
-    if @slot.plan && @slot.plan.duration_minutes
-      @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
-    elsif @slot.plan && @slot.plan.end_time
-      @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
-      if @slot.end_at < @slot.start_at
-        @slot.end_at = @slot.end_at + 1.day
+    return if @slot.start_at.blank?
+      if @slot.plan && @slot.plan.duration_minutes
+        @slot.end_at = @slot.start_at + @slot.plan.duration_minutes.minutes
+      elsif @slot.plan && @slot.plan.end_time
+        @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
+        if @slot.end_at < @slot.start_at
+          @slot.end_at = @slot.end_at + 1.day
+        end
+      elsif @slot.end_at.blank?
+        @slot.end_at = @slot.start_at + 2.hours
       end
-    elsif @slot.end_at.blank?
-      @slot.end_at = @slot.start_at + 2.hours
-    end
   end
 end
