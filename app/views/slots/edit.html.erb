@@ -1,2 +1,5 @@
-<%= render "form" %>
-
+<% if @slot.reservation? %>
+  <%= render "form" %>
+<% else %>
+  <%= render "quick_form" %>
+<% end %>

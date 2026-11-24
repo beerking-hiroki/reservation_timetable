@@ -76,6 +76,24 @@
   background-size: var(--cell-width) 100%;
 }
 
+.cell-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+}
+
+.cell {
+  width: var(--cell-width);
+  height: 100%;
+}
+
+.cell:hover {
+  background-color: rgba(0, 0, 255, 0.1);
+}
+
 .slot {
   position: absolute;
   top: 0;
@@ -92,10 +110,14 @@
 
 .slot.block {
   background-color: #ccc;
+  font-size: 0.7rem;
+  padding: 0%;
 }
 
 .slot.walk_in {
   background-color: lightblue;
+  font-size: 0.7rem;
+  padding: 0%;
 }
 
 .hour {

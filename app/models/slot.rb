@@ -20,6 +20,10 @@ class Slot < ApplicationRecord
     other.start_at <= end_at && start_at <= other.end_at
   end
 
+  def display_name
+    name.presence || (walk_in? ? "ウォークイン" : "ブロック")
+  end
+
   private
   def start_within_plan_time
     return unless plan && plan.start_time? && plan.end_time?
