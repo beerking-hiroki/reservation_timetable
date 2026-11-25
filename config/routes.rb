@@ -20,5 +20,9 @@ Rails.application.routes.draw do
   resource :store_setting, only: [ :show, :edit, :update ]
   resources :plans, only: [ :new, :create, :edit, :update, :destroy ]
   resources :rooms, only: [ :edit, :update ]
-  resources :slots, only: [ :new, :create, :edit, :update, :destroy ]
+  resources :slots, only: [ :new, :create, :edit, :update, :destroy ] do
+    member do
+      patch :move
+    end
+  end
 end
