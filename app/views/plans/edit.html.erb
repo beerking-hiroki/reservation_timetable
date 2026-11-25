@@ -12,6 +12,10 @@
       <%= form.time_field :end_time %>
     </div>  
     <%= form.submit "保存する" %>
+    <% if @plan.persisted? %>
+      <%= link_to "削除", plan_path(@plan), data: {
+        turbo_method: :delete, turbo_confirm: "削除しますか？", turbo_frame: "_top" } %>
+    <% end %>    
     <%= link_to "キャンセル", store_setting_path %>
   <% end %>
 <% end %>
