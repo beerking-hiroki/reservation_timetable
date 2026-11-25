@@ -56,6 +56,23 @@ class SlotsController < ApplicationController
     end
   end
 
+  def move
+    @slot = current_store.slots.find(params[:id])
+    duration = @slot.end_at - @slot.start_at
+    @slot.assign_attributes(move_params)
+    @slot.end_at = @slot.start_at + duration
+    if @slot.plan && @slot.plan.end_time
+      @slot.end_at = @slot.start_at.change(hour: @slot.plan.end_time.hour, min: @slot.plan.end_time.min)
+    end
+    if @slot.save
+      flash[:notice] = "移動しました"
+      redirect_to root_path(date: @slot.start_at.to_date)
+    else
+      flash[:alert] = @slot.errors.full_messages.join("、")
+      redirect_to root_path(date: @slot.start_at.to_date)
+    end
+  end
+
   private
 
   def slot_params
@@ -81,5 +98,9 @@ class SlotsController < ApplicationController
       elsif @slot.end_at.blank?
         @slot.end_at = @slot.start_at + 2.hours
       end
+  end
+
+  def move_params
+    params.expect(slot: [ :room_id, :start_at ])
   end
 end
