@@ -19,30 +19,30 @@
     <% end %>
     </div>
 
+<div data-controller="slot-move">
+  <% @rooms.each do | room | %>
+    <div class="room-row">
 
-<% @rooms.each do | room | %>
-  <div class="room-row">
-
-    <div class="room-label">
-      <%= room.name %> (定員<%= room.min_capacity %>~<%= room.max_capacity %>名) 
-    </div>
-  
-    <div class="room-track">
-      <div class="cell-layer">
-        <% @times.each do | time | %>
-          <%= link_to "", new_slot_path(room_id: room.id, start_at: time, quick: true),class: "cell", data: { turbo_frame: "slot_form" } %>
-        <% end %>  
+      <div class="room-label">
+        <%= room.name %> (定員<%= room.min_capacity %>~<%= room.max_capacity %>名) 
       </div>
-        <% room.slots.where(start_at: @range).each do |slot| %>
-          <%= link_to edit_slot_path(slot), class: "slot #{slot.kind}", style: "left: #{slot_start(slot)}%; width: #{slot_width(slot)}%;" do %>
-            <%= slot.display_name %>
+    
+      <div class="room-track">
+        <div class="cell-layer">
+          <% @times.each do | time | %>
+            <%= link_to "", new_slot_path(room_id: room.id, start_at: time, quick: true),class: "cell", data: { turbo_frame: "slot_form", room_id: room.id, start_at: time, action: "dragover->slot-move#allow drop->slot-move#drop" } %>
           <% end %>
-          <%# slot.start_at %>
-          <%# slot.end_at %>
-        <% end %>  
-    </div>    
-  </div>
-<% end %>
-
+        </div>
+          <% room.slots.where(start_at: @range).each do |slot| %>
+            <%= link_to edit_slot_path(slot), class: "slot #{slot.kind}", style: "left: #{slot_start(slot)}%; width: #{slot_width(slot)}%;", draggable: true, data: { move_url: move_slot_path(slot), action: "dragstart->slot-move#start dragend->slot-move#end" } do %>
+              <%= slot.display_name %>
+            <% end %>
+            <%# slot.start_at %>
+            <%# slot.end_at %>
+          <% end %>  
+      </div>    
+    </div>
+  <% end %>
+</div>
   </div>
 </div>
