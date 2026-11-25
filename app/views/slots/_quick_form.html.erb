@@ -1,21 +1,33 @@
-  <%= form_with model: @slot, data: { turbo_frame: "_top" } do | form | %>
-
-    <%= form.label :headcount, "利用人数" %>
-      <%= form.number_field :headcount %> 
-
+  <%= form_with model: @slot, class: "slot-form", data: { turbo_frame: "_top" } do | form | %>
+     <div class="form-field">
+      <%= form.label :kind, "種類" %>
+      <%= form.select :kind, [["ウォークイン", "walk_in"],["ブロック", "block"]]%>
+    </div>
+    <div class="form-field">
+      <%= form.label :room_id, "部屋" %>
       <%= form.collection_select :room_id, @rooms, :id, :name %>
-    <%= form.label :plan_id, "プラン" %>
+    </div>
+    <div class="form-field">
+      <%= form.label :headcount, "利用人数" %>
+      <%= form.number_field :headcount %> 
+    </div>  
+    <div class="form-field ">
+      <%= form.label :plan_id, "プラン" %>
       <%= form.collection_select :plan_id, @plans, :id, :name, include_blank: true %>
-    <%= form.label :start_at, "開始時間" %>
+    </div>
+    <div class="form-field">
+      <%= form.label :start_at, "開始時間" %>
       <%= form.datetime_field :start_at, step: 900 %>
-    <%= form.label :end_at, "終了時間" %>
+    </div>  
+    <div class="form-field">
+      <%= form.label :end_at, "終了時間" %>
       <%= form.datetime_field :end_at %>
-    <%= form.select :kind, [["ウォークイン", "walk_in"],["ブロック", "block"]]%>
-    
-    <%= form.submit @slot.persisted? ? "更新する" : "登録する" %>
-    <% if @slot.persisted? %>
-      <%= link_to "削除", slot_path(@slot), data: { turbo_method: :delete} %>
-    <% end %>
-    <%= link_to "戻る", root_path, data: { turbo_frame: "_top" } %>
-  
+    </div>  
+    <div class="form-actions">
+      <%= form.submit @slot.persisted? ? "更新する" : "登録する" %>
+      <% if @slot.persisted? %>
+        <%= link_to "削除", slot_path(@slot), data: { turbo_method: :delete} %>
+      <% end %>
+      <%= link_to "戻る", root_path, data: { turbo_frame: "_top" } %>
+    </div>
   <% end %>
