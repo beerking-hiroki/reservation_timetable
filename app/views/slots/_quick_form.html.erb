@@ -26,7 +26,7 @@
     <div class="form-actions">
       <%= form.submit @slot.persisted? ? "更新する" : "登録する" %>
       <% if @slot.persisted? %>
-        <%= link_to "削除", slot_path(@slot), data: { turbo_method: :delete} %>
+        <%= link_to "削除", slot_path(@slot), data: { turbo_method: :delete } %>
       <% end %>
       <%= link_to "戻る", root_path, data: { turbo_frame: "_top" } %>
     </div>

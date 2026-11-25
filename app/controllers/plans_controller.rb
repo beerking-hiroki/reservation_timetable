@@ -29,6 +29,18 @@ class PlansController < ApplicationController
     end
   end
 
+  def destroy
+    @plan = current_store.plans.find(params[:id])
+    if @plan.slots.exists?
+      flash[:alert] = "予約で使われているプランは削除できません"
+      redirect_to store_setting_path
+    else
+      @plan.destroy
+      flash[:notice] = "削除しました"
+      redirect_to store_setting_path
+    end
+  end
+
   private
 
   def plan_params
