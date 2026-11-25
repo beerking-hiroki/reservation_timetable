@@ -11,6 +11,7 @@
 
 body {
   margin: 0;
+  background-color: var(--color-page);
 }
 
 :root {
@@ -25,6 +26,7 @@ body {
   --color-surface: #F3F4F6;
   --color-line: #E5E7EB;
   --color-line-strong: #9CA3AF;
+  --color-page: #ECEEF2;
 }
 
 .login-page {
@@ -176,22 +178,23 @@ header {
   border: 1px solid #fbf6f6;
 }
 
-a.slot {
+.slot {
   text-decoration: none;
   font-size: 0.7rem;
 }
 
-.slot.reservation a {
-  color: #000;
+.slot.reservation {
+  color: #fff;
 }
 
-.slot.block a,
-.slot.walk_in a {
+.slot.block ,
+.slot.walk_in {
   color: #374151;
 }
 
 .slot.reservation {
   background-color: var(--color-reservation);
+  padding: 0%;
 }
 
 .slot.block {
