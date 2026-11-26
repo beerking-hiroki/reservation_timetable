@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
         redirect_to root_path
       else
         redirect_to store_setting_path
-      end      
+      end
     else
       flash.now[:alert] = @room.errors.full_messages.join("、")
       render :edit, status: :unprocessable_entity
@@ -24,4 +24,3 @@ class RoomsController < ApplicationController
       params.expect(room: [ :name, :min_capacity, :max_capacity ])
     end
 end
-
