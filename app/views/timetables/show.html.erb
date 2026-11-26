@@ -24,7 +24,12 @@
     <div class="room-row">
 
       <div class="room-label">
-        <%= room.name %> (定員<%= room.min_capacity %>~<%= room.max_capacity %>名) 
+      <%= turbo_frame_tag room do %>
+        <%= link_to edit_room_path(room, capacity_only: true) do %>
+          <div><%= room.name %></div>
+          <div><%= room.min_capacity %>~<%= room.max_capacity %>名</div>
+        <% end %>
+      <% end %>
       </div>
     
       <div class="room-track">
