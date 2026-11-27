@@ -6,7 +6,7 @@ class PlansController < ApplicationController
   def create
     @plan = current_store.plans.new(plan_params)
     if @plan.save
-      flash[:notice] = "プランを追加しましたよん"
+      flash[:notice] = "プランを追加しました"
       redirect_to store_setting_path
     else
       flash.now[:alert] = @plan.errors.full_messages.join("、")
