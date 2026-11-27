@@ -34,7 +34,7 @@ class SlotsController < ApplicationController
     set_end_at
     if @slot.save
       flash[:notice] = "更新しました"
-      redirect_back(fallback_location: store_setting_path)
+      redirect_to root_path(date: @slot.start_at.to_date)
     else
       flash.now[:alert] = @slot.errors.full_messages.join("、")
       @rooms = current_store.rooms
