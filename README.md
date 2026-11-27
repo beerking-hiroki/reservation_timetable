@@ -1,27 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 
 # reservation_timetable
  
@@ -180,21 +156,24 @@ MVPは、今の予約システムを置き換えるものではなく、「タ�
 
 ### MVPで作る機能
 
-- タップで仮のウォークインを入れる(MVPではブロック予約の仕組みで実現し、あとから人数や時間を編集できる)
-- ブロック予約(部屋と時間を押さえる)
+- ログイン・ログアウト(スタッフだけが入れる)
+- ウォークイン・ブロックの登録(タイムテーブルの空きマスをタップして入力。同じ仕組みで、種類を選ぶ。あとから人数や時間を編集できる)
 - 予約の新規登録(電話予約などを、スタッフが入力)
-- 予約の詳細確認
-- 予約の移動(別の部屋や時間へ)
-- 収容人数の変更(MVPでは、スタッフの目安として表示)
+- 予約の詳細確認・予約編集
+- ドラッグ&ドロップで予約を移動(別の部屋や時間へ)
+- 収容人数の変更(タイムテーブルの部屋名から、画面を切り替えずに変更できる。)
+- タイムテーブルの日付切り替え
 - 重なりの表示(タイムテーブル上で知らせる。入力は止めない)
-- プラン(予約やウォークインの入力時に選ぶと、その時間幅でタイムテーブルが埋まる)
+- プラン(予約やウォークインの入力時に選ぶと、その時間幅でタイムテーブルが埋まる)。プランの追加・編集・削除ができる(予約で使われているプランは削除できない)
+- 店舗設定画面(店舗情報の編集、部屋の編集、プランの登録・編集・削除)
 
 ### 本リリースで作る機能
 
 - Webの予約フォーム(定員に合わない人数や、重複する時間は予約できない)
 - 来店のステータス管理(来店前、来店済み、退店済み)
 - 売り上げ予測
-
+- タブレットでも、ドラッグ&ドロップで移動できるようにする
+(※ドラッグ&ドロップでの移動は、現在PCのマウス操作のみ対応しています。タッチ操作への対応は、本リリースで行います。)
 ---
  
 ## 8. このアプリの懸念点とその対策
@@ -239,12 +218,13 @@ MVPは、今の予約システムを置き換えるものではなく、「タ�
  
 ### 10-1. 使用予定の技術
  
-- **フレームワーク**:Ruby on Rails 8.1.4(Ruby 3.4.12)
+- **フレームワーク**:Ruby on Rails 8.1(Ruby 3.4.13)
 - **DB**:MySQL
 - **デプロイ先**:AWS
 - **開発環境**:Docker
-- **使用予定ライブラリ**:
-  - 画面まわり:turbo-rails、stimulus-rails(Hotwire)、jsbundling-rails
+- **使用ライブラリ**:
+  - 画面まわり:turbo-rails、stimulus-rails(Hotwire)
+  - JSのビルド:jsbundling-rails、esbuild、Node(yarn)
   - ログイン:bcrypt(パスワードの暗号化)
   - テスト:capybara、selenium-webdriver
   - 品質・セキュリティ:rubocop-rails-omakase(コードの書き方のチェック)、brakeman(脆弱性チェック)、bundler-audit(gemの脆弱性チェック)
@@ -264,3 +244,8 @@ MVPは、今の予約システムを置き換えるものではなく、「タ�
  
 Reactは、MVPのリリース後に、React単体のキャッチアップと、アプリに組み込む技術的な検証を行ったうえで、導入する方針です。
  
+## 11. デプロイ先:AWS(EC2)
+
+- URL:http://54.79.127.75
+- 現在は、MVPレビュー用の仮の環境です(AWS EC2。HTTP・IPアドレスのみ)。
+- ログインにはレビュー依頼のissueに記載したアカウントを使用してください。
