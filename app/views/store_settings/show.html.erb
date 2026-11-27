@@ -1,46 +1,60 @@
 <h2>店舗設定</h2>
-<%= turbo_frame_tag "store_info" do %>
-  <%= link_to "編集", edit_store_setting_path %>
-  <%= @store.name %>
-  <%= @store.open_time.strftime("%H:%M") %>
-  ~
-  <%= @store.close_time.strftime("%H:%M") %>
-<% end %>  
 
+<section class="setting-card">
+  <h3 class="setting-title">店舗情報</h3>
+  <%= turbo_frame_tag "store_info" do %>
+    <div class="setting-row">
+      <span>
+        <%= @store.name %>
+        <span class="setting-sub">
+          <%= @store.open_time.strftime("%H:%M") %>~<%= @store.close_time.strftime("%H:%M") %>
+        </span>
+      </span>
+      <%= link_to "編集", edit_store_setting_path %>
+    </div>  
+  <% end %>  
+</section>
+
+<section class="setting-card">
+  <h3 class="setting-title">部屋</h3>
   <% @store.rooms.each do | room | %>
     <%= turbo_frame_tag room do %>
-        <div class=" rooms-index">
-          <p>部屋名</p>
+      <div class="setting-row">
+        <span>
             <%= room.name %>
-            
-          <p>定員人数</p>
-            <%= room.min_capacity %>
-            ~
-            <%= room.max_capacity %>
-            <%= link_to "編集", edit_room_path(room) %>
-        </div>   
+            <span class="setting-sub">
+              定員<%= room.min_capacity %>~<%= room.max_capacity %>
+            </span>  
+        </span>
+        <%= link_to "編集", edit_room_path(room) %>
+      </div>
     <% end %>
   <% end %>
+</section>
 
-
-<h2>プラン</h2>
-<%= turbo_frame_tag "new_plan" do %>
-  <div><%= link_to "プラン追加", new_plan_path %></div>
-<% end %>  
-    <% @store.plans.each do | plan | %>
-      <%= turbo_frame_tag plan do %>
-        <div><%= link_to "編集", edit_plan_path(plan) %></div>
-        <div class=" plans-index">
-          <%= plan.name %>
-          <% if plan.duration_minutes.nil? %>
-            <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
-          <% else %>
-            <%= plan.duration_minutes %>分
-          <% end %> 
-        </div>
+<section class="setting-card">
+  <h3 class="setting-title">プラン</h3>
+      <% @store.plans.each do | plan | %>
+        <%= turbo_frame_tag plan do %>
+          <div class="setting-row">
+            <span>
+              <%= plan.name %>
+                <span class="setting-sub">
+                  <% if plan.duration_minutes.nil? %>
+                    <%= plan.start_time.strftime("%H:%M") %>~<%= plan.end_time.strftime("%H:%M") %>
+                  <% else %>
+                    <%= plan.duration_minutes %>分
+                  <% end %>
+                </span>
+              </span>
+            <%= link_to "編集", edit_plan_path(plan) %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-
-
-  
+      <%= turbo_frame_tag "new_plan" do %>
+        <div class="setting-row">
+          <%= link_to "+ プラン追加", new_plan_path %>
+        </div>  
+      <% end %>  
+</section>
 

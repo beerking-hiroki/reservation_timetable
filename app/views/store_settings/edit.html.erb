@@ -1,15 +1,21 @@
 <%= turbo_frame_tag "store_info" do %>
   <%= flash.now[:alert] %>
-  <%= form_with model: @store, url: store_setting_path do | form | %>
-    <%= form.label :name, "店舗名" %>
-    <%= form.text_field :name %>
-    <div>
+  <%= form_with model: @store, url: store_setting_path, class:'setting-form' do | form | %>
+    <div class="form-field form-field-wide">
+      <%= form.label :name, "店舗名" %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="form-field">  
       <%= form.label :open_time, "営業開始時間" %>
       <%= form.time_field :open_time %>
+    </div>  
+    <div class="form-field">
       <%= form.label :close_time, "営業終了時間" %>
       <%= form.time_field :close_time %>
     </div>  
-    <%= form.submit "保存する" %>
-    <%= link_to "キャンセル", store_setting_path %>
+    <div class="form-actions">
+      <%= form.submit "保存する" %>
+      <%= link_to "キャンセル", store_setting_path %>
+    </div>
   <% end %>
 <% end %>

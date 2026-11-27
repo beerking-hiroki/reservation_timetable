@@ -1,18 +1,25 @@
 <%= turbo_frame_tag @room do %>
   <%= flash.now[:alert] %>
-  <%= form_with model: @room do | form | %>
+  <%= form_with model: @room, class:'setting-form' do | form | %>
+
     <% unless params[:capacity_only].present? %>
-      <%= form.label :name, "部屋名" %>
-      <%= form.text_field :name %>
-    <% end %>  
-    <div>
-      <%= form.label :min_capacity, "最小人数" %>
-      <%= form.number_field :min_capacity %>
-      <%= form.label :max_capacity, "最大人数" %>
-      <%= form.number_field :max_capacity %>
-    </div>  
+      <div class="form-field form-field-wide">
+        <%= form.label :name, "部屋名" %>
+        <%= form.text_field :name %>
+      </div>
+    <% end %>
+      <div class="form-field">
+        <%= form.label :min_capacity, "最小人数" %>
+        <%= form.number_field :min_capacity %>
+      </div>
+      <div class="form-field">  
+        <%= form.label :max_capacity, "最大人数" %>
+        <%= form.number_field :max_capacity %>
+      </div>
     <%= hidden_field_tag :capacity_only, params[:capacity_only] %>
-    <%= form.submit "保存する" %>
-    <%= link_to "キャンセル", :back %>
+    <div class="form-actions">
+      <%= form.submit "保存する" %>
+      <%= link_to "キャンセル", :back %>
+    </div>  
   <% end %>
 <% end %>

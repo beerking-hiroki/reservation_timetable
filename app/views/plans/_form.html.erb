@@ -1,0 +1,28 @@
+<%= turbo_frame_tag @plan do %>
+  <%= flash.now[:alert] %>
+  <%= form_with model: @plan, class: "setting-form", data: { turbo_frame: (@plan.persisted? ? nil : "_top") } do |form| %>
+    <div class="form-field form-field-wide">
+      <%= form.label :name, "プラン名" %>
+      <%= form.text_field :name %>
+    </div>
+    <div class="form-field form-field-wide">
+      <%= form.label :duration_minutes, "長さ" %>
+      <%= form.number_field :duration_minutes %>
+    </div>
+    <div class="form-field">
+      <%= form.label :start_time, "開始" %>
+      <%= form.time_field :start_time %>
+    </div>
+    <div class="form-field">
+      <%= form.label :end_time, "終了" %>
+      <%= form.time_field :end_time %>
+    </div>
+    <div class="form-actions">
+      <%= form.submit @plan.persisted? ? "更新する" : "プランを追加する" %>
+      <% if @plan.persisted? %>
+        <%= link_to "削除", plan_path(@plan), data: { turbo_method: :delete, turbo_confirm: "削除しますか？", turbo_frame: "_top" } %>
+      <% end %>
+      <%= link_to "キャンセル", store_setting_path %>
+    </div>
+  <% end %>
+<% end %>
