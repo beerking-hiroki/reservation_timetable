@@ -1,0 +1,32 @@
+ja:
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      blank: "を入力してください"
+      not_a_number: "は数値で入力してください"
+      required: "を選択してください"
+      greater_than_or_equal_to: "は%{count}以上で入力してください"
+      greater_than: "は%{count}より大きい数値で入力してください"
+  activerecord:
+    attributes:
+      slot:
+        name: 名前
+        tel: 電話番号
+        headcount: 利用人数
+        room_id: 部屋
+        plan_id: プラン
+        start_at: 開始時間
+        end_at: 終了時間
+      room:
+        name: 部屋名
+        min_capacity: 最小人数
+        max_capacity: 最大人数
+      plan: 
+        name: プラン名
+        duration_minutes: 利用時間
+        start_time: 開始
+        end_time: 終了
+      store:
+        name: 店舗名
+        open_time: 営業開始時間
+        close_time: 営業終了時間
