@@ -12,7 +12,8 @@ class Slot < ApplicationRecord
   validates :end_at, comparison: { greater_than: :start_at, message: "は開始時間より後にしてください" }
   validates :name, presence: true, if: :reservation?
   validates :tel, presence: true, if: :reservation?
-  validates :headcount, presence: true, numericality: { only_integer: true, greater_than: 0 }, if: :reservation?
+  validates :headcount, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
+  validates :headcount, presence: true, if: :reservation?
   validates :plan_id, presence: true, if: :reservation?
   validate :start_within_plan_time
 
