@@ -4,6 +4,7 @@ class Plan < ApplicationRecord
 
   validates :name, presence: true
   validate :duration_or_time_range
+  validates :duration_minutes, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
   private
 

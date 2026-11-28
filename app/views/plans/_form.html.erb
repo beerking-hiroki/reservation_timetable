@@ -7,7 +7,7 @@
     </div>
     <div class="form-field form-field-wide">
       <%= form.label :duration_minutes, "利用時間" %>
-      <%= form.number_field :duration_minutes %>
+      <%= form.number_field :duration_minutes, min: 1 %>
     </div>
     <div class="form-field">
       <%= form.label :start_time, "開始" %>

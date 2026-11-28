@@ -9,7 +9,7 @@
     </div>
     <div class="form-field">  
       <%= form.label :headcount, "利用人数" %>
-      <%= form.number_field :headcount %> 
+      <%= form.number_field :headcount, min: 1 %> 
     </div>
     <div class="form-field">  
       <%= form.label :room_id, "部屋" %>
