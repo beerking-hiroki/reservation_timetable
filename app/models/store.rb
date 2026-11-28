@@ -10,7 +10,6 @@ class Store < ApplicationRecord
   validates :open_time, presence: true
   validates :close_time, presence: true
 
-
   def opening_hours(date)
     start_at = date.in_time_zone.change(hour: open_time.hour, min: open_time.min)
     end_at = date.in_time_zone.change(hour: close_time.hour, min: close_time.min)

@@ -10,11 +10,11 @@
     <% end %>
       <div class="form-field">
         <%= form.label :min_capacity, "最小人数" %>
-        <%= form.number_field :min_capacity %>
+        <%= form.number_field :min_capacity, min: 1 %>
       </div>
       <div class="form-field">  
         <%= form.label :max_capacity, "最大人数" %>
-        <%= form.number_field :max_capacity %>
+        <%= form.number_field :max_capacity, min: 1 %>
       </div>
     <%= hidden_field_tag :capacity_only, params[:capacity_only] %>
     <div class="form-actions">

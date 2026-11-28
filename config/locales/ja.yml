@@ -7,6 +7,7 @@ ja:
       required: "を選択してください"
       greater_than_or_equal_to: "は%{count}以上で入力してください"
       greater_than: "は%{count}より大きい数値で入力してください"
+      not_an_integer: "は整数で入力してください"
   activerecord:
     attributes:
       slot:
@@ -27,6 +28,7 @@ ja:
         start_time: 開始
         end_time: 終了
       store:
+        store: 店舗
         name: 店舗名
         open_time: 営業開始時間
         close_time: 営業終了時間
